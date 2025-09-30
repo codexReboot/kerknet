@@ -1,0 +1,21 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": "20.18.3"
+				},
+				"modules": "commonjs"
+			}
+		]
+	],
+	"plugins": [
+		[
+			"@babel/plugin-transform-modules-commonjs",
+			{
+				"allowTopLevelThis": true
+			}
+		]
+	]
+}

@@ -1,0 +1,254 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+//////////////////////////////////////////////////////////////////////////////////
+//   General Form Styling - Dark Theme
+//////////////////////////////////////////////////////////////////////////////////
+
+// the html form tag to obtain the info to create the slides with
+.form-container {
+	@include displayFlexColumn;
+	width: min(100%, 450px);
+	margin: 2rem auto;
+	padding: 2rem;
+	border-radius: 8px;
+	color: #e0e0e0;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	// sections are the html fieldset to group info under - erediens, skrifgedeelte, sang, kollekte etc
+	&__formSectionContainer {
+		width: 100%;
+		box-shadow: 0 0 24px 8px rgba(black, 0.95);
+		margin: 2rem;
+		padding: 2rem;
+		// section (fieldset) headings
+		legend {
+			padding: 0 1rem;
+			background-color: $dark;
+			border: 1px solid $white;
+		}
+	}
+	&__groupField--bookChaptEtc {
+		@include displayFlexRow;
+		gap: 1rem;
+	}
+	// form responsiveness accross all screen sizes
+	@include respond(tab-port) {
+		width: min(100%, 750px);
+		// headingH2 inside the form tag - responsiveness
+		&__headingH2LineBreak {
+			display: none;
+		}
+		&__formSectionContainer--skrifgedeelte {
+			@include displayFlexRow;
+			gap: 1rem;
+		}
+		&__groupField {
+			@include displayFlexRow;
+			gap: 1rem;
+		}
+		&__groupField--bookChaptEtc {
+			flex: 1 0 0;
+		}
+		&__inputContainer {
+			flex: 1 0 0;
+		}
+		&__inputContainer--skrifgedeelteBook {
+			flex: 3 0 0;
+		}
+	}
+}
+.form-container h2 {
+	margin-bottom: 1.5rem;
+	font-weight: 600;
+	color: #fafafa;
+	text-align: center;
+}
+
+label {
+	color: $white;
+	display: block;
+	margin-bottom: 0.3rem;
+	font-weight: 600;
+	color: #bbbbbb;
+	font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+	width: 100%;
+	padding: 0.5rem 0.7rem;
+	margin-bottom: 1.2rem;
+	border: 1.5px solid #333;
+	border-radius: 5px;
+	background-color: #222;
+	color: #eee;
+	font-size: 1rem;
+	transition: border-color 0.3s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+input[type="number"]::placeholder,
+select::placeholder,
+textarea::placeholder {
+	color: #777;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+	outline: none;
+	border-color: #66aaff;
+	background-color: #1a1a1a;
+	color: #fff;
+}
+
+/* ==========================
+   Group Headings
+========================== */
+
+.group-heading {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin: 1.5rem 0 0.8rem;
+	color: #ccc;
+	border-bottom: 2px solid #333;
+	padding-bottom: 0.3rem;
+}
+
+.sub-heading {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	color: #999;
+}
+
+/* ==========================
+   Inline Fields for Scripture and Psalm Sang
+========================== */
+
+/* Book dropdown - wider */
+.scripture-group select,
+.psalm-entry-row select {
+	flex: 2 1 150px;
+	min-width: 150px;
+	background-color: #222;
+	border: 1.5px solid #333;
+	color: #eee;
+	font-size: 1rem;
+	padding: 0.5rem;
+	border-radius: 5px;
+}
+
+/* Text inputs for numbers - smaller */
+.scripture-group input[type="number"],
+.psalm-entry-row input[type="number"] {
+	flex: 1 1 60px;
+	max-width: 70px;
+	padding: 0.4rem 0.5rem;
+	font-size: 1rem;
+	background-color: #222;
+	border: 1.5px solid #333;
+	color: #eee;
+	border-radius: 5px;
+}
+
+/* Text input for psalm/skrifberyming number */
+.psalm-entry-row input[type="text"] {
+	flex: 2 1 120px;
+	min-width: 120px;
+	padding: 0.5rem;
+	font-size: 1rem;
+	background-color: #222;
+	border: 1.5px solid #333;
+	color: #eee;
+	border-radius: 5px;
+}
+
+/* ==========================
+   Kollektes inputs grouped side by side
+========================== */
+
+.kollektes-group {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.kollekte-item {
+	flex: 1 1 45%;
+}
+
+/* ==========================
+   Psalm and Skrifberyming list styles
+========================== */
+
+.list-container {
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
+	background-color: #222;
+	border: 1.5px solid #333;
+	border-radius: 5px;
+	padding: 0.7rem 1rem;
+	max-height: 140px;
+	overflow-y: auto;
+	color: #bbb;
+	font-size: 0.9rem;
+}
+
+.list-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.35rem 0;
+	border-bottom: 1px solid #333;
+}
+
+.list-item:last-child {
+	border-bottom: none;
+}
+
+.list-item span {
+	flex: 1;
+}
+
+.list-item button.remove-btn {
+	background-color: transparent;
+	border: none;
+	color: #e74c3c;
+	font-weight: 700;
+	font-size: 1.2rem;
+	cursor: pointer;
+	padding: 0 0.5rem;
+	transition: color 0.3s ease;
+}
+
+.list-item button.remove-btn:hover {
+	color: #c0392b;
+}
+
+/* ==========================
+   Add Button styling
+========================== */
+
+button.add-btn {
+	background-color: #009688;
+	border: none;
+	color: white;
+	padding: 0.5rem 1rem;
+	font-weight: 600;
+	font-size: 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 0.5rem;
+	transition: background-color 0.25s ease;
+}
+
+button.add-btn:hover {
+	background-color: #00796b;
+}

@@ -1,0 +1,922 @@
+/*
+0px	      - 		600px:			mobile 		-->   Mobile First Approach (where normal styles apply)
+600px 	- 		900px: 			tab-port 	      -->	Tablet Portrait 
+900px	      -		1200px:			tab-land	      -->	Tablet Landscape
+1200px	-		1800px:			desk		      -->	Desktop 
+1800px +							big-desk	      -->	Big Desktop
+
+REMEMBER: 1em = 16px;
+$breakpoint argument choices
+	- tab-port and >	600 --> 900 	: min-width: 37.5em (600/16)
+	- tab-land and >	900 --> 1200	: min-width: 56.25em (900/16)
+	- desk and     >	1200 --> 1800	: min-width: 75em (1200/16)
+	- big-desk and >  1800 +		: min-width: 112.5em (1800/16)
+
+ORDER: base + typography > general layout + grid > page layout > components
+
+*/
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+html {
+  /* Mobile-first base font size */
+  font-size: 62.5%; /* Makes 1rem = 10px for easier scaling */
+  -webkit-text-size-adjust: 100%; /* Prevents iOS from auto-resizing text */
+  -moz-tab-size: 4; /* Sets tab width to 4 spaces in Firefox */
+  tab-size: 4; /* Sets tab width to 4 spaces in other browsers */
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+@media (min-width: 37.5em) {
+  html {
+    /* 	11px / 16px *100 = 68.75% */
+    font-size: 68.75%;
+  }
+}
+@media (min-width: 56.25em) {
+  html {
+    /* 	12px / 16px *100 = 75% */
+    font-size: 75%;
+  }
+}
+@media (min-width: 75em) {
+  html {
+    /* 	13px / 16px *100 = 81.25% */
+    font-size: 81.25%;
+  }
+}
+@media (min-width: 112.5em) {
+  html {
+    /* 	14px / 16px *100 = 87.5% */
+    font-size: 87.5%;
+  }
+}
+
+body {
+  color: #f2f2f2;
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #333333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+*:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 1px;
+  transition: outline 0.2s ease-in-out;
+}
+
+.headingH1 {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.headingH2,
+.headingH3,
+.headingH4 {
+  color: #f2f2f2;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-size: clamp(1.6rem, 5vw, 1.8rem);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+.headingH2--formLabel,
+.headingH3--formLabel,
+.headingH4--formLabel {
+  font-size: clamp(1.5rem, 5vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.paragraph {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  gap: 0.5rem;
+  background-color: #f2f2f2;
+  border-top: 2px solid #555555;
+  border-left: 2px solid #818181;
+  border-bottom: 2px solid #b4b4b4;
+  border-right: 2px solid #f2f2f2;
+  border-radius: 0.45rem;
+  box-shadow: 0 0 25px 5px rgba(51, 51, 51, 0.25);
+  width: fit-content;
+  padding: 0.5em 1em;
+  margin: 0 auto;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transition: all 0.2s;
+}
+.btn:link, .btn:visited {
+  text-decoration: none;
+  transform: translateY(0px);
+}
+.btn:hover {
+  box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.55);
+  transform: translateY(-2px);
+}
+.btn:active {
+  border-bottom: 2px solid #818181;
+  border-right: 2px solid #818181;
+  box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+.btn--eerste {
+  background-color: rgba(242, 242, 242, 0.25);
+  padding: 0.35em 1.25em;
+}
+.btn--eerste:hover {
+  background-color: rgba(242, 242, 242, 0.35);
+}
+.btn--tweede {
+  background-color: rgba(242, 242, 242, 0.1);
+  padding: 0.15em 0.75em;
+}
+.btn--tweede:hover {
+  background-color: rgba(0, 83, 160, 0.2);
+}
+.btn--keerTerug {
+  background-color: rgba(242, 242, 242, 0.05);
+  padding: 0.35em 1.25em;
+}
+.btn--keerTerug:hover {
+  background-color: rgba(242, 242, 242, 0.1);
+  padding: 0.35em 1.25em;
+}
+.btn--submitForm {
+  background-color: rgba(0, 83, 160, 0.95);
+  padding: 0.35em 1.25em;
+  margin: 2rem;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 450px);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.form-container__formSectionContainer {
+  width: 100%;
+  box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.95);
+  margin: 2rem;
+  padding: 2rem;
+}
+.form-container__formSectionContainer legend {
+  padding: 0 1rem;
+  background-color: #333333;
+  border: 1px solid #f2f2f2;
+}
+.form-container__groupField--bookChaptEtc {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  gap: 1rem;
+}
+@media (min-width: 37.5em) {
+  .form-container {
+    width: min(100%, 750px);
+  }
+  .form-container__headingH2LineBreak {
+    display: none;
+  }
+  .form-container__formSectionContainer--skrifgedeelte {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    gap: 1rem;
+  }
+  .form-container__groupField {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    gap: 1rem;
+  }
+  .form-container__groupField--bookChaptEtc {
+    flex: 1 0 0;
+  }
+  .form-container__inputContainer {
+    flex: 1 0 0;
+  }
+  .form-container__inputContainer--skrifgedeelteBook {
+    flex: 3 0 0;
+  }
+}
+
+.form-container h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #fafafa;
+  text-align: center;
+}
+
+label {
+  color: #f2f2f2;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #bbbbbb;
+  font-size: 0.95rem;
+}
+
+input[type=text],
+input[type=date],
+input[type=number],
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 1.2rem;
+  border: 1.5px solid #333;
+  border-radius: 5px;
+  background-color: #222;
+  color: #eee;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type=text]::placeholder,
+input[type=date]::placeholder,
+input[type=number]::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #777;
+}
+
+input[type=text]:focus,
+input[type=date]:focus,
+input[type=number]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #66aaff;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+/* ==========================
+   Group Headings
+========================== */
+.group-heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.8rem;
+  color: #ccc;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.3rem;
+}
+
+.sub-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #999;
+}
+
+/* ==========================
+   Inline Fields for Scripture and Psalm Sang
+========================== */
+/* Book dropdown - wider */
+.scripture-group select,
+.psalm-entry-row select {
+  flex: 2 1 150px;
+  min-width: 150px;
+  background-color: #222;
+  border: 1.5px solid #333;
+  color: #eee;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+/* Text inputs for numbers - smaller */
+.scripture-group input[type=number],
+.psalm-entry-row input[type=number] {
+  flex: 1 1 60px;
+  max-width: 70px;
+  padding: 0.4rem 0.5rem;
+  font-size: 1rem;
+  background-color: #222;
+  border: 1.5px solid #333;
+  color: #eee;
+  border-radius: 5px;
+}
+
+/* Text input for psalm/skrifberyming number */
+.psalm-entry-row input[type=text] {
+  flex: 2 1 120px;
+  min-width: 120px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #222;
+  border: 1.5px solid #333;
+  color: #eee;
+  border-radius: 5px;
+}
+
+/* ==========================
+   Kollektes inputs grouped side by side
+========================== */
+.kollektes-group {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.kollekte-item {
+  flex: 1 1 45%;
+}
+
+/* ==========================
+   Psalm and Skrifberyming list styles
+========================== */
+.list-container {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #222;
+  border: 1.5px solid #333;
+  border-radius: 5px;
+  padding: 0.7rem 1rem;
+  max-height: 140px;
+  overflow-y: auto;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item span {
+  flex: 1;
+}
+
+.list-item button.remove-btn {
+  background-color: transparent;
+  border: none;
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.list-item button.remove-btn:hover {
+  color: #c0392b;
+}
+
+/* ==========================
+   Add Button styling
+========================== */
+button.add-btn {
+  background-color: #009688;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background-color 0.25s ease;
+}
+
+button.add-btn:hover {
+  background-color: #00796b;
+}
+
+#slidesContainer {
+  position: relative;
+  width: 100vw;
+  height: 95vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* fade in/out */
+  pointer-events: none; /* prevent interaction on hidden slides */
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#navArrows {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none; /* prevent blocking clicks when hidden */
+}
+
+#prevBtn {
+  margin-left: 15px;
+}
+
+#nextBtn {
+  margin-right: 15px;
+}
+
+#navArrows.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-arrow {
+  background-color: #f2f2f2;
+  box-shadow: 0 0 25px 5px rgba(51, 51, 51, 0.25);
+  border: none;
+  color: #03417c;
+  font-size: 3rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+  user-select: none;
+  outline: none;
+}
+
+/* Arrows (already have visible class toggle) */
+#arrows {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none; /* prevent clicks when hidden */
+}
+
+#arrows.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Cursor */
+body.hide-cursor {
+  cursor: none;
+}
+
+.footer {
+  background-color: #333333;
+  padding: 0 2rem;
+}
+
+.header {
+  padding: 0 2rem;
+}
+
+.header__heroSection {
+  padding: 12rem 0 0;
+}
+
+.main {
+  padding: 0 2rem;
+}
+.main__ctaContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  gap: 2rem;
+  padding: 3rem 2rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #333333;
+  border-bottom: 1px solid rgba(242, 242, 242, 0.65);
+  box-shadow: 0px 8px 12px 8px rgba(51, 51, 51, 0.85);
+  height: 7rem;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: opacity 800ms;
+  /* Nav items default state (hidden) */
+}
+.nav__logoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.nav__logo {
+  display: block;
+  width: 13rem;
+  height: auto;
+  transition: width 0.3s;
+}
+.nav__logo:hover {
+  width: 13.5rem;
+}
+.nav__hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  backface-visibility: hidden;
+  transition: gap 0.3s;
+}
+.nav__hamburger div {
+  width: 3rem;
+  height: 3px;
+  background: #f2f2f2;
+  backface-visibility: hidden;
+  transition: all 0.3s ease;
+}
+.nav__hamburger--active div:nth-child(1) {
+  background: rgba(242, 242, 242, 0.35);
+  width: 3.3rem;
+  height: 5px;
+  transform: translateY(10px) rotate(45deg);
+}
+.nav__hamburger--active div:nth-child(2) {
+  opacity: 0;
+}
+.nav__hamburger--active div:nth-child(3) {
+  background: rgba(242, 242, 242, 0.35);
+  width: 3.3rem;
+  height: 5px;
+  transform: translateY(-8px) rotate(-45deg);
+}
+.nav__hamburger--activeBar {
+  background: #f2f2f2;
+}
+.nav__hamburger--active:hover div:nth-child(1) {
+  transform: translateY(12px) rotate(45deg);
+}
+.nav__hamburger--active:hover div:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+.nav__hamburger:hover {
+  gap: 7px;
+}
+.nav__list {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(51, 51, 51, 0.95);
+  border-top: 1px solid rgba(242, 242, 242, 0.1);
+  width: 100%;
+  height: 95vh;
+  padding: 5rem 1rem 0;
+  position: fixed;
+  top: 6.9rem;
+  left: 0;
+  visibility: hidden; /* Hide initially */
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.nav__list--open {
+  display: flex; /* Show on open */
+}
+.nav__item {
+  opacity: 0;
+  transform: translateY(20rem);
+}
+.nav__link {
+  display: block;
+  width: 10rem;
+  height: 3rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 750px) {
+  .nav {
+    padding: 0.5rem 2rem;
+  }
+  .nav__hamburger {
+    display: none;
+  }
+  .nav__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: transparent;
+    border-top: none;
+    height: 2rem;
+    padding: 0;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    position: static;
+    z-index: 1100;
+  }
+  .nav__item {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+}
+.sidebar {
+  padding: 0 2rem;
+}
+
+.slide-section .slide {
+  width: 1280px;
+  height: 680px;
+  background: #e0e0e0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.slide-section .slide .slide__textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-left: 5rem;
+  width: 100%;
+}
+.slide-section .slide .slide__textContainer--transition {
+  align-items: center;
+  margin-left: 0;
+}
+.slide-section .slide .slide__textContainer--psalms {
+  gap: 5rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+.slide-section .slide .slide__textContainer--geloofsbelydenis, .slide-section .slide .slide__textContainer--wet, .slide-section .slide .slide__textContainer--skriflesing {
+  padding: 0 5rem 0 5rem;
+  margin: 0;
+}
+.slide-section .slide .slide__title {
+  color: #0053a0;
+  font-size: 5rem;
+  font-weight: bold;
+  letter-spacing: 0;
+  text-align: left;
+  text-decoration: 5px solid underline;
+  text-underline-offset: 10px;
+  margin-bottom: 0rem;
+  width: 100%;
+}
+.slide-section .slide .slide__title--subheading {
+  font-size: 3.8rem;
+}
+.slide-section .slide .slide__title--transition {
+  color: #03417c;
+  text-align: center;
+  text-decoration: none;
+}
+.slide-section .slide .slide__title--psalms {
+  color: #f2f2f2;
+  font-size: 3.8rem;
+  text-align: center;
+  text-decoration: 4px solid underline;
+  text-underline-offset: 7px;
+  background-color: #0053a0;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px 5px rgba(51, 51, 51, 0.25);
+  padding: 1.25rem 0;
+}
+.slide-section .slide .slide__text--erediensInfo {
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+.slide-section .slide .slide__text--psalms {
+  color: rgba(51, 51, 51, 0.85);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  white-space: pre-line;
+  padding: 0 3rem;
+}
+.slide-section .slide .slide__text--geloofsbelydenis, .slide-section .slide .slide__text--wet, .slide-section .slide .slide__text--skriflesing {
+  color: rgba(51, 51, 51, 0.85);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: left;
+  white-space: pre-line;
+  padding: 0;
+}
+.slide-section .slide .slide__text sup {
+  margin-right: 0.65rem;
+}
+.slide-section .slide .slide__imgContainer {
+  flex: 0 0 45%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.slide-section .slide .slide__imgContainer .slide__img {
+  display: block;
+  height: 100%;
+  width: auto;
+  margin: 0 0 0 auto;
+}
+.slide-section .slide--transition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1280px;
+  height: 680px;
+  background: linear-gradient(135deg, #f0f0f0, #a9a9a9);
+}
+.slide-section .slide--kollektes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f0f0, #a9a9a9);
+}
+.slide-section .slide__kollektesTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-items: flex-start;
+  gap: 3rem;
+}
+.slide-section .slide__kollektesSoortContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-items: flex-start;
+  gap: 2rem;
+  text-align: left;
+}
+.slide-section .slide__kollektesTitle {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #0053a0;
+  text-align: left;
+}
+.slide-section .slide__kollektesSubheading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2a2a2b;
+  text-align: left;
+  text-decoration: 5px solid underline;
+  text-underline-offset: 4px;
+}
+.slide-section .slide__kollektesParagraph {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #3b3b3b;
+  text-align: left;
+}
+.slide-section .slide--psalms {
+  align-items: flex-start;
+  padding: 7rem 5rem 0;
+}
+.slide-section .slide--black {
+  background-color: #333333;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,9 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.header {
+	padding: 0 2rem;
+}
+.header__heroSection {
+	padding: 12rem 0 0;
+}

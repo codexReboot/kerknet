@@ -1,0 +1,82 @@
+////////////////////////////////////////////////////////////////////////////////////////
+// MEDIA QUERY MANAGER
+///////////////////////////////////////////////////////////////////////////////////////
+
+/*
+0px	      - 		600px:			mobile 		-->   Mobile First Approach (where normal styles apply)
+600px 	- 		900px: 			tab-port 	      -->	Tablet Portrait 
+900px	      -		1200px:			tab-land	      -->	Tablet Landscape
+1200px	-		1800px:			desk		      -->	Desktop 
+1800px +							big-desk	      -->	Big Desktop
+
+REMEMBER: 1em = 16px;
+$breakpoint argument choices
+	- tab-port and >	600 --> 900 	: min-width: 37.5em (600/16)
+	- tab-land and >	900 --> 1200	: min-width: 56.25em (900/16)
+	- desk and     >	1200 --> 1800	: min-width: 75em (1200/16)
+	- big-desk and >  1800 +		: min-width: 112.5em (1800/16)
+
+ORDER: base + typography > general layout + grid > page layout > components
+
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == tab-port {
+    // min-width: 37.5em (600/16)
+    @media (min-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    // min-width: 56.25em (900/16)
+    @media (min-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desk {
+    // min-width: 75em (1200/16)
+    @media (min-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desk {
+    // min-width: 112.5em (1800/16)
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
+
+// to make background color for text visible
+@mixin backgroundTextTransparent {
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// btn icon sizes
+@mixin btnIconSize {
+  width: clamp(3.5rem, 9vw, 4.5rem);
+  height: clamp(3.5rem, 9vw, 4.5rem);
+}
+
+// centering elements - COLUMN
+@mixin displayFlexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+// centering elements - ROW
+@mixin displayFlexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

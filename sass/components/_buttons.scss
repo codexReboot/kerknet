@@ -1,0 +1,63 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.btn {
+	@include displayFlexRow;
+	gap: 0.5rem;
+	background-color: $white;
+	border-top: 2px solid $dark-grey;
+	border-left: 2px solid $grey;
+	border-bottom: 2px solid $light-grey;
+	border-right: 2px solid $white;
+	border-radius: 0.45rem;
+	box-shadow: 0 0 25px 5px rgba($dark, 0.25);
+	width: fit-content;
+	padding: 0.5em 1em;
+	margin: 0 auto;
+	cursor: pointer;
+	backface-visibility: hidden;
+	transition: all 0.2s;
+	&:link,
+	&:visited {
+		text-decoration: none;
+		transform: translateY(0px);
+	}
+	&:hover {
+		box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.55);
+		transform: translateY(-2px);
+	}
+	&:active {
+		border-bottom: 2px solid $grey;
+		border-right: 2px solid $grey;
+		box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.35);
+		transform: translateY(-1px);
+	}
+	&--eerste {
+		background-color: rgba($white, 0.25);
+		padding: 0.35em 1.25em;
+	}
+	&--eerste:hover {
+		background-color: rgba($white, 0.35);
+	}
+	&--tweede {
+		background-color: rgba($white, 0.1);
+		padding: 0.15em 0.75em;
+	}
+	&--tweede:hover {
+		background-color: rgba($blue, 0.2);
+	}
+	&--keerTerug {
+		background-color: rgba($white, 0.05);
+		padding: 0.35em 1.25em;
+	}
+	&--keerTerug:hover {
+		background-color: rgba($white, 0.1);
+		padding: 0.35em 1.25em;
+	}
+	&--submitForm {
+		background-color: rgba($blue, 0.95);
+		padding: 0.35em 1.25em;
+		margin: 2rem;
+		width: 100%;
+	}
+}

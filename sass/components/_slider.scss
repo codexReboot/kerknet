@@ -1,0 +1,94 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+#slidesContainer {
+	position: relative;
+	width: 100vw;
+	height: 95vh;
+	overflow: hidden;
+}
+
+.slide {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	opacity: 0;
+	transition: opacity 0.5s ease; /* fade in/out */
+	pointer-events: none; /* prevent interaction on hidden slides */
+}
+
+.slide.active {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#navArrows {
+	position: absolute;
+	top: 50%;
+	@include displayFlexRow;
+	justify-content: space-between;
+	width: 100%;
+	transform: translateY(-50%);
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	pointer-events: none; /* prevent blocking clicks when hidden */
+}
+
+#prevBtn {
+	margin-left: 15px;
+}
+#nextBtn {
+	margin-right: 15px;
+}
+
+#navArrows.visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.nav-arrow {
+	background-color: rgba($white, 1);
+	box-shadow: 0 0 25px 5px rgba($dark, 0.25);
+	border: none;
+	color: $dark-blue;
+	font-size: 3rem;
+	padding: 1rem 1.5rem;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	transition: background 0.3s;
+	user-select: none;
+	outline: none;
+}
+
+// .nav-arrow:hover {
+// 	background: rgba(0, 0, 0, 0.8);
+// }
+
+/* Arrows (already have visible class toggle) */
+#arrows {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 2rem;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	pointer-events: none; /* prevent clicks when hidden */
+}
+
+#arrows.visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Cursor */
+body.hide-cursor {
+	cursor: none;
+}

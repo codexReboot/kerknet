@@ -1,0 +1,14 @@
+{
+  "name": "dopper_multimedia_skepper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
+    "dotenv": "^16.6.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

@@ -1,0 +1,56 @@
+{
+	"name": "dopper_multimedia_skepper",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "A multimedia slide generator for Reformed worship services. Built with Express.js, Dopper MMS helps churches easily create sermon slides, including scripture readings, psalms, confessions, and liturgical transitions — all from structured inputs.",
+	"main": "src/index.js",
+	"scripts": {
+		"start-server": "node src/index.js",
+		"sass": "sass --watch sass/main.scss:public/css/style.css",
+		"server": "nodemon src/index.js --watch src --ext js,ejs",
+		"browser-sync": "node bs.js",
+		"dev": "npm-run-all --parallel server sass browser-sync",
+		"open": "google-chrome http://localhost:3000 &",
+		"start": "npm-run-all --parallel dev open",
+		"clean": "rm -rf dist",
+		"build": "npm run clean && babel src --out-dir dist && node scripts/build.js"
+	},
+	"keywords": [
+		"dopper",
+		"multimedia",
+		"church",
+		"reformed",
+		"worship",
+		"slides",
+		"expressjs",
+		"presentation",
+		"sermon",
+		"liturgie",
+		"afrikaans",
+		"psalms",
+		"skriflesing",
+		"geloofsbelydenis",
+		"wet",
+		"prediking",
+		"ere diens",
+		"worship-tools",
+		"slide-generator"
+	],
+	"author": "Schalk van Dyk",
+	"license": "ISC",
+	"dependencies": {
+		"babel-plugin-transform-inline-environment-variables": "^0.4.4",
+		"dotenv": "^16.6.0",
+		"ejs": "^3.1.10",
+		"express": "^4.21.2"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.27.2",
+		"@babel/core": "^7.27.4",
+		"@babel/preset-env": "^7.27.2",
+		"browser-sync": "^3.0.4",
+		"nodemon": "^3.1.9",
+		"npm-run-all": "^4.1.5",
+		"sass": "^1.85.0"
+	}
+}

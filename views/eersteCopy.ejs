@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= title || 'Erediens-Skyfies-Blad' %></title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+			rel="stylesheet" />
+
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+		<header class="header">
+			<section class="header__heroSection">
+				<h1>Erediens-Skyfies-Blad</h1>
+				<p>
+					Welkom by die Erediens-Skyfies-Blad. Hierdie bladsy help jou om die liturgie en skyfies vir ’n erediens van jou keuse saam te stel. Kies eenvoudig die tipe erediens waarvoor jy
+					skyfies benodig, voltooi die res van die vorm, en klik dan op die Voltooi-knoppie.
+				</p>
+			</section>
+		</header>
+		<main>
+			<section class="form-section">
+				<form id="dienstForm" action="/submit-eerste" method="POST" class="form-container">
+					<h2>Voltooi asseblief <br class="form-container__headingH2LineBreak" />al die inligting.</h2>
+
+					<!-- Diens -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Erediens</legend>
+						<div class="form-container__groupField">
+							<!-- weeksdag -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="weeksdag">Weeksdag:</label>
+								<input type="text" id="weeksdag" name="weeksdag" placeholder="bv. Sondag" required />
+							</div>
+
+							<!-- datum -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="datum">Datum:</label>
+								<input type="Text" id="datum" name="datum" placeholder="bv. 20 Julie 2025" required />
+							</div>
+						</div>
+						<div class="form-container__groupField">
+							<!-- tyd -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="Tyd">Tyd:</label>
+								<input type="Text" id="tyd" name="tyd" placeholder="bv. 08h30" required />
+							</div>
+
+							<!-- diensVolgorde -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="diensVolgorde">Watter Erediens?:</label>
+								<select id="diensVolgorde" name="diensVolgorde" required>
+									<option value="" disabled selected>Kies ’n erediens</option>
+									<option value="Eerste Erediens">Eerste Erediens</option>
+									<option value="Tweede Erediens">Tweede Erediens</option>
+									<option value="Nagmaal">Nagmaal</option>
+									<option value="Doop">Doop</option>
+									<option value="Begrafnis">Begrafnis</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-container__groupField">
+							<!-- predikant -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="prediker">Predikant:</label>
+								<input type="text" id="prediker" name="prediker" placeholder="bv. Ds. Henk Stavast" required />
+							</div>
+
+							<!-- Tema -->
+							<div class="form-container__inputContainer">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="tema">Tema:</label>
+								<input type="text" id="tema" name="tema" placeholder="bv. Soek in God jou sterkte." required />
+							</div>
+						</div>
+					</fieldset>
+
+					<!-- Skrifgedeelte -->
+					<fieldset class="form-container__formSectionContainer form-container__formSectionContainer--skrifgedeelte">
+						<legend>Skrifgedeelte</legend>
+						<!-- boek -->
+						<div class="form-container__inputContainer form-container__inputContainer--skrifgedeelteBook">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="scriptureBook">Bybel Boek:</label>
+							<select id="scriptureBook" name="scriptureBook" required>
+								<!-- Dynamically populate books -->
+								<option value="Genesis">Genesis</option>
+								<option value="Exodus">Exodus</option>
+								<option value="Levitikus">Levitikus</option>
+								<option value="Numeri">Numeri</option>
+								<option value="Deuteronomium">Deuteronomium</option>
+								<option value="Josua">Josua</option>
+								<option value="Rigters">Rigters</option>
+								<option value="Rut">Rut</option>
+								<option value="1 Samuel">1 Samuel</option>
+								<option value="2 Samuel">2 Samuel</option>
+								<option value="1 Konings">1 Konings</option>
+								<option value="2 Konings">2 Konings</option>
+								<option value="1 Kronieke">1 Kronieke</option>
+								<option value="2 Kronieke">2 Kronieke</option>
+								<option value="Esra">Esra</option>
+								<option value="Nehemia">Nehemia</option>
+								<option value="Ester">Ester</option>
+								<option value="Job">Job</option>
+								<option value="Psalms">Psalms</option>
+								<option value="Spreuke">Spreuke</option>
+								<option value="Prediker">Prediker</option>
+								<option value="Hooglied">Hooglied</option>
+								<option value="Jesaja">Jesaja</option>
+								<option value="Jeremia">Jeremia</option>
+								<option value="Klaagliedere">Klaagliedere</option>
+								<option value="Esegiel">Esegiel</option>
+								<option value="Daniel">Daniel</option>
+								<option value="Hosea">Hosea</option>
+								<option value="Joel">Joel</option>
+								<option value="Amos">Amos</option>
+								<option value="Obadja">Obadja</option>
+								<option value="Jona">Jona</option>
+								<option value="Miga">Miga</option>
+								<option value="Nahum">Nahum</option>
+								<option value="Habakuk">Habakuk</option>
+								<option value="Sefanja">Sefanja</option>
+								<option value="Haggai">Haggai</option>
+								<option value="Sagaria">Sagaria</option>
+								<option value="Maleagi">Maleagi</option>
+								<option value="Mattheus">Mattheus</option>
+								<option value="Markus">Markus</option>
+								<option value="Lukas">Lukas</option>
+								<option value="Johannes">Johannes</option>
+								<option value="Handelinge">Handelinge</option>
+								<option value="Romeine">Romeine</option>
+								<option value="1 Korinthiers">1 Korinthiers</option>
+								<option value="2 Korinthiers">2 Korinthiers</option>
+								<option value="Galasiers">Galasiers</option>
+								<option value="Efesiers">Efesiers</option>
+								<option value="Filippense">Filippense</option>
+								<option value="Kolossense">Kolossense</option>
+								<option value="1 Thessalonicense">1 Thessalonicense</option>
+								<option value="2 Thessalonicense">2 Thessalonicense</option>
+								<option value="1 Timotheus">1 Timotheus</option>
+								<option value="2 Timotheus">2 Timotheus</option>
+								<option value="Titus">Titus</option>
+								<option value="Filemon">Filemon</option>
+								<option value="Hebreers">Hebreers</option>
+								<option value="Jakobus">Jakobus</option>
+								<option value="1 Petrus">1 Petrus</option>
+								<option value="2 Petrus">2 Petrus</option>
+								<option value="1 Johannes">1 Johannes</option>
+								<option value="2 Johannes">2 Johannes</option>
+								<option value="3 Johannes">3 Johannes</option>
+								<option value="Judas">Judas</option>
+								<option value="Openbaring">Openbaring</option>
+							</select>
+						</div>
+						<div class="form-container__groupField form-container__groupField--bookChaptEtc">
+							<!-- hoofstuk -->
+							<div class="form-container__inputContainer form-container__inputContainer--skrifgedeelteTheRest">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="scriptureChapter">Hfst:</label>
+								<input type="number" id="scriptureChapter" name="scriptureChapter" min="1" placeholder="0" required />
+							</div>
+							<!-- begin vers -->
+							<div class="form-container__inputContainer form-container__inputContainer--skrifgedeelteTheRest">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="scriptureVerseStart">Vers:</label>
+								<input type="number" id="scriptureVerseStart" name="scriptureVerseStart" min="1" placeholder="0" required />
+							</div>
+							<!-- tot vers -->
+							<div class="form-container__inputContainer form-container__inputContainer--skrifgedeelteTheRest">
+								<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="scriptureVerseEnd">Tot:</label>
+								<input type="number" id="scriptureVerseEnd" name="scriptureVerseEnd" placeholder="0" min="1" />
+							</div>
+						</div>
+						<ul id="readList" class="read-list">
+							<li class="placeholder">bv. Genesis 1: 1-30</li>
+						</ul>
+					</fieldset>
+
+					<!-- Belydenisskrifte -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Belydenisskrifte</legend>
+
+						<!-- Tipe Belydenis -->
+						<div class="form-container__inputContainer">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="confessionType">Tipe:</label>
+							<select id="confessionType" name="confessionType">
+								<option value="" disabled selected>Kies ’n belydenisskrif</option>
+								<option value="Heidelbergse Kategismus">Heidelbergse Kategismus</option>
+								<option value="Nederlandse Geloofsbelydenis">Nederlandse Geloofsbelydenis</option>
+								<option value="Dordtse Leerreëls">Dordtse Leerreëls</option>
+							</select>
+						</div>
+
+						<!-- Vraag of Artikel -->
+						<div class="form-container__inputContainer">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="confessionReference">Vraag / Artikel / Hoofstuk:</label>
+							<input type="text" id="confessionReference" name="confessionReference" placeholder="bv. Vraag 1 of Artikel 14" required />
+						</div>
+
+						<ul id="confessionList" class="read-list">
+							<li class="placeholder">bv. Heidelbergse Kategismus – Vraag 1</li>
+						</ul>
+					</fieldset>
+
+					<!-- Psalm Sang -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Sang</legend>
+
+						<div class="psalm-entry-row">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="songType">Tipe:</label>
+							<select id="songType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="songNumber">Nommer:</label>
+							<input type="number" id="songNumber" placeholder="bv. 23" min="1" />
+
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="songVerses">Verse:</label>
+							<input type="text" id="songVerses" placeholder="bv. 1, 2, 3" />
+
+							<button type="button" id="addSongBtn">Voeg by</button>
+						</div>
+
+						<ul id="songList" class="song-list">
+							<li class="placeholder">bv. Psalm 23: 1, 2, 3</li>
+						</ul>
+
+						<input type="hidden" name="songSequence" id="songSequence" />
+					</fieldset>
+
+					<!-- Kollektes -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Kollekte</legend>
+
+						<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="kollekteDiens">Tydens die erediens:</label>
+						<input type="text" id="kollekteDiens" name="kollekteDiens" placeholder="bv. Diens van Barmhartigheid" required />
+
+						<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="kollekteDeure">By die deure:</label>
+						<input type="text" id="kollekteDeure" name="kollekteDeure" placeholder="bv. Ramings" required />
+					</fieldset>
+
+					<button type="submit" class="submit-btn">Stuur inligting</button>
+				</form>
+			</section>
+			<a href="/develop" class="btn btn--keerTerug">Terug na Tuisblad</a>
+		</main>
+		<%- include('partials/footer') %>
+	</body>
+</html>

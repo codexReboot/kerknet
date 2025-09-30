@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Erediens Skyfies</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<main id="slidesContainer" class="slides-main">
+			<!-- Helper Functions for Song Rendering -->
+			<% function getVerseLines(verse) { if (!verse) return []; if (typeof verse === "string") return verse.split(/\n/); if (Array.isArray(verse)) return verse.flatMap(l => typeof l === "string"
+			? l.split(/\n/) : []); if (verse.text && Array.isArray(verse.text)) return verse.text; return [String(verse)]; } function splitLinesIfLong(lines) { if (lines.length <= 5) return [lines];
+			const mid = Math.ceil(lines.length / 2); return [lines.slice(0, mid), lines.slice(mid)]; } function renderSongSlide(song) { if (!song || !song.verses) return ''; let slidesHtml = '';
+			Object.entries(song.verses).forEach(([verseNum, verseData]) => { const lines = getVerseLines(verseData); const lineChunks = splitLinesIfLong(lines); lineChunks.forEach((chunkLines, idx) =>
+			{ slidesHtml += `
+			<section class="slide-section slide-section-song">
+				<slide class="slide slide--psalms">
+					<div class="slide__textContainer slide__textContainer--psalms">
+						<h1 class="slide__title slide__title--psalms">${song.type} ${song.number}: ${verseNum}${idx === 1 ? 'b' : (idx === 0 && lineChunks.length > 1 ? 'a' : '')}</h1>
+						<p class="slide__text slide__text--psalms">${chunkLines.join('<br />')}</p>
+					</div>
+				</slide>
+			</section>
+			`; }); }); return slidesHtml; } %>
+
+			<!-- Sermon Details Slide -->
+			<section class="slide-section slide-section-sermon-details">
+				<slide class="slide">
+					<div class="slide__textContainer">
+						<h1 class="slide__title">Erediens Inligting:</h1>
+						<div>
+							<p class="slide__text slide__text--erediensInfo"><%= datum %></p>
+							<p class="slide__text slide__text--erediensInfo"><%= diensVolgorde %></p>
+							<p class="slide__text slide__text--erediensInfo"><%= prediker %></p>
+						</div>
+						<h2 class="slide__title slide__title--subheading">Tema:</h2>
+						<p class="slide__text slide__text--erediensInfo"><%= tema %></p>
+					</div>
+					<div class="slide__imgContainer">
+						<img class="slide__img" src="./img/slideImg/kerk.jpg" alt="Kerk" />
+					</div>
+				</slide>
+			</section>
+
+			<!-- Pre-Scripture Transition Slides -->
+			<section class="slide-section slide-section-transition">
+				<slide class="slide transition-slide slide--transition">
+					<div class="slide__textContainer slide__textContainer--transition">
+						<h1 class="slide__title slide__title--transition">Voorsang</h1>
+					</div>
+				</slide>
+			</section>
+
+			<!-- Voorsang -->
+			<%- renderSongSlide(songs.voorsang) %>
+
+			<section class="slide-section slide-section-transition">
+				<slide class="slide transition-slide slide--transition">
+					<div class="slide__textContainer slide__textContainer--transition">
+						<h1 class="slide__title slide__title--transition">Votum en Seëngroet</h1>
+					</div>
+				</slide>
+			</section>
+
+			<!-- Lof Psalm -->
+			<%- renderSongSlide(songs.lofPsalmSeengroet) %>
+
+			<!-- Apostolic Creed Slides -->
+			<% if (creedSlides && creedSlides.length) { creedSlides.forEach((slide, index) => { %>
+			<section class="slide-section slide-section-creed">
+				<slide class="slide">
+					<div class="slide__textContainer slide__textContainer--geloofsbelydenis">
+						<% if (index === 0) { %>
+						<h1 class="slide__title">Die Apostoliese Geloofsbelydenis</h1>
+						<% } %>
+						<p class="slide__text slide__text--geloofsbelydenis"><%- slide %></p>
+					</div>
+				</slide>
+			</section>
+			<% }) } %>
+
+			<!-- Ten Commandments Slides -->
+			<% if (commandmentSlides && commandmentSlides.length) { commandmentSlides.forEach((slide, index) => { %>
+			<section class="slide-section slide-section-commandments">
+				<slide class="slide">
+					<div class="slide__textContainer slide__textContainer--wet">
+						<% if (index === 0) { %>
+						<h1 class="slide__title">Die Wet van die Here: Eksodus 20</h1>
+						<% } %>
+						<p class="slide__text slide__text--wet"><%- slide %></p>
+					</div>
+				</slide>
+			</section>
+			<% }) } %>
+
+			<!-- Psalm na die Wet -->
+			<%- renderSongSlide(songs.psalmNaWet) %>
+
+			<!-- Gebed Transition before Psalm Voor Woord -->
+			<section class="slide-section slide-section-transition">
+				<slide class="slide transition-slide slide--transition">
+					<div class="slide__textContainer slide__textContainer--transition">
+						<h1 class="slide__title slide__title--transition">Gebed</h1>
+					</div>
+				</slide>
+			</section>
+
+			<!-- Psalm Voor Woord -->
+			<%- renderSongSlide(songs.psalmVoorWoord) %>
+
+			<!-- Scripture Slides -->
+			<% scriptureSlides.forEach((chunk, idx) => { %>
+			<section class="slide-section slide-section-scripture">
+				<slide class="slide">
+					<div class="slide__textContainer slide__textContainer--skriflesing">
+						<% if (idx === 0) { %>
+						<h1 class="slide__title">Skrifgedeelte: <%= skrifgedeelte %></h1>
+						<% } %>
+						<p class="slide__text slide__text--skriflesing"><%- chunk %></p>
+					</div>
+				</slide>
+			</section>
+			<% }) %>
+
+			<!-- Teksverse Slides -->
+			<% teksverseSlides.forEach((chunk, idx) => { %>
+			<section class="slide-section slide-section-teksverse">
+				<slide class="slide">
+					<div class="slide__textContainer slide__textContainer--skriflesing">
+						<% if (idx === 0) { %>
+						<h1 class="slide__title">Teksvers/e: <%= teksverse %></h1>
+						<% } %>
+						<p class="slide__text slide__text--skriflesing"><%- chunk %></p>
+					</div>
+				</slide>
+			</section>
+			<% }) %>
+
+			<!-- Blank Slide -->
+			<section class="slide-section slide-section-black">
+				<slide class="slide slide--black"></slide>
+			</section>
+
+			<!-- Gebed Transition before Kollektes -->
+			<section class="slide-section slide-section-transition">
+				<slide class="slide transition-slide slide--transition">
+					<div class="slide__textContainer slide__textContainer--transition">
+						<h1 class="slide__title slide__title--transition">Gebed</h1>
+					</div>
+				</slide>
+			</section>
+
+			<!-- Kollektes Slide -->
+			<% if ((kollektesErediens || kollektesDeure)) { %>
+			<section class="slide-section slide-section-kollektes">
+				<slide class="slide slide--kollektes">
+					<div class="slide__kollektesTextContainer">
+						<h1 class="slide__kollektesTitle">Kollektes:</h1>
+						<div class="slide-info slide__kollektesSoortContainer">
+							<% if (kollektesErediens) { %>
+							<div class="slide-kollekte-block">
+								<h3 class="slide__kollektesSubheading">Tydens die Erediens:</h3>
+								<p class="slide__kollektesParagraph"><%= kollektesErediens %></p>
+							</div>
+							<% } %> <% if (kollektesDeure) { %>
+							<div class="slide-kollekte-block">
+								<h3 class="slide__kollektesSubheading">By die Deure:</h3>
+								<p class="slide__kollektesParagraph"><%= kollektesDeure %></p>
+							</div>
+							<% } %>
+						</div>
+					</div>
+				</slide>
+			</section>
+			<% } %>
+
+			<!-- Psalm Slot -->
+			<%- renderSongSlide(songs.psalmSlot) %>
+
+			<!-- Seëngroet Slide -->
+			<section class="slide-section slide-section-transition">
+				<slide class="slide transition-slide slide--transition">
+					<div class="slide__textContainer slide__textContainer--transition">
+						<h1 class="slide__title slide__title--transition">Seëngroet</h1>
+					</div>
+				</slide>
+			</section>
+
+			<!-- Blank Slide -->
+			<section class="slide-section slide-section-black">
+				<slide class="slide slide--black"></slide>
+			</section>
+		</main>
+
+		<div id="navArrows">
+			<button id="prevBtn" class="nav-arrow">&#10094;</button>
+			<button id="nextBtn" class="nav-arrow">&#10095;</button>
+		</div>
+		<script src="js/slider.js"></script>
+	</body>
+</html>

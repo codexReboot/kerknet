@@ -1,0 +1,176 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.slide-section {
+	.slide {
+		width: 1280px;
+		height: 680px;
+		background: #e0e0e0;
+		border-radius: 1rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		margin: 2rem auto;
+		@include displayFlexRow;
+		justify-content: space-between;
+		.slide__textContainer {
+			@include displayFlexColumn;
+			align-items: flex-start;
+			gap: 1.5rem;
+			margin-left: 5rem;
+			width: 100%;
+
+			&--transition {
+				align-items: center;
+				margin-left: 0;
+			}
+			&--psalms {
+				gap: 5rem;
+				justify-content: flex-start;
+				align-items: center;
+				margin: 0;
+			}
+			&--geloofsbelydenis,
+			&--wet,
+			&--skriflesing {
+				padding: 0 5rem 0 5rem;
+				margin: 0;
+			}
+		}
+		.slide__title {
+			color: $blue;
+			font-size: 5rem;
+			font-weight: bold;
+			letter-spacing: 0;
+			text-align: left;
+			text-decoration: 5px solid underline;
+			text-underline-offset: 10px;
+
+			margin-bottom: 0rem;
+			width: 100%;
+
+			&--subheading {
+				font-size: 3.8rem;
+			}
+			&--transition {
+				color: rgba($dark-blue, 1);
+				text-align: center;
+				text-decoration: none;
+			}
+			&--psalms {
+				color: $white;
+				font-size: 3.8rem;
+				text-align: center;
+				text-decoration: 4px solid underline;
+				text-underline-offset: 7px;
+				background-color: $blue;
+				border-radius: 1rem;
+				box-shadow: 0 0 25px 5px rgba($dark, 0.25);
+
+				padding: 1.25rem 0;
+			}
+		}
+		.slide__text {
+			&--erediensInfo {
+				color: $dark;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 3.5rem;
+				font-weight: 700;
+				line-height: 1.2;
+				text-align: left;
+				margin-bottom: 0.5rem;
+			}
+			&--psalms {
+				color: rgba($dark, 0.85);
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 3.5rem; // matches sermon details
+				font-weight: 700;
+				line-height: 1.6;
+				text-align: center;
+				white-space: pre-line; // preserves line breaks
+				padding: 0 3rem;
+			}
+			&--geloofsbelydenis,
+			&--wet,
+			&--skriflesing {
+				color: rgba($dark, 0.85);
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 3.5rem; // matches sermon details
+				font-weight: 700;
+				line-height: 1.6;
+				text-align: left;
+				white-space: pre-line; // preserves line breaks
+				padding: 0;
+			}
+			sup {
+				margin-right: 0.65rem;
+			}
+		}
+		.slide__imgContainer {
+			flex: 0 0 45%;
+			height: 100%;
+			overflow: hidden;
+			border-radius: 1rem;
+			.slide__img {
+				display: block;
+				height: 100%;
+				width: auto;
+				margin: 0 0 0 auto;
+			}
+		}
+		&--transition {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 1280px;
+			height: 680px;
+			background: linear-gradient(135deg, #f0f0f0, #a9a9a9);
+		}
+		&--kollektes {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background: linear-gradient(135deg, #f0f0f0, #a9a9a9);
+		}
+		// psalms/skrifberymings
+
+		// kollektes
+		&__kollektesTextContainer {
+			@include displayFlexColumn;
+			align-items: flex-start;
+			gap: 3rem;
+		}
+		&__kollektesSoortContainer {
+			@include displayFlexColumn;
+			align-items: flex-start;
+			gap: 2rem;
+			text-align: left;
+		}
+		&__kollektesTitle {
+			font-size: 5rem;
+			font-weight: bold;
+			color: $blue;
+			text-align: left;
+		}
+		&__kollektesSubheading {
+			font-size: 3rem;
+			font-weight: bold;
+			color: #2a2a2b;
+			text-align: left;
+			text-decoration: 5px solid underline;
+			text-underline-offset: 4px;
+		}
+		&__kollektesParagraph {
+			font-size: 2.8rem;
+			font-weight: 700;
+			color: #3b3b3b;
+			text-align: left;
+		}
+		&--psalms {
+			align-items: flex-start;
+			padding: 7rem 5rem 0;
+		}
+		&--black {
+			background-color: $dark;
+		}
+	}
+}

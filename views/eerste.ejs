@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= title || 'Erediens-Skyfies-Blad' %></title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+			rel="stylesheet" />
+
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+		<header class="header">
+			<section class="header__heroSection">
+				<h1>Erediens-Skyfies-Blad</h1>
+				<p>
+					Welkom by die Erediens-Skyfies-Blad. Hierdie bladsy help jou om die liturgie en skyfies vir ’n erediens van jou keuse saam te stel. Kies eenvoudig die tipe erediens waarvoor jy
+					skyfies benodig, voltooi die res van die vorm, en klik dan op die Voltooi-knoppie.
+				</p>
+			</section>
+		</header>
+		<main>
+			<section class="form-section">
+				<form id="dienstForm" action="/preview-slide" method="POST" class="form-container form">
+					<h2>Voltooi asseblief <br class="form-container__headingH2LineBreak" />al die inligting.</h2>
+
+					<!-- Sermon Details -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Erediens Inligting: Eerste Skyfie</legend>
+
+						<!-- Datum -->
+						<div class="form-container__groupField">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="datum">Datum:</label>
+							<input type="text" id="datum" name="datum" placeholder="bv. Sondag, 20 Julie 2025" required />
+						</div>
+
+						<!-- Diens Volgorde -->
+						<div class="form-container__groupField">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="diensVolgorde">Watter Erediens?:</label>
+							<select id="diensVolgorde" name="diensVolgorde" required>
+								<option value="" disabled selected>Kies ’n erediens</option>
+								<option value="Eerste Erediens - 08h30">Eerste Erediens</option>
+								<option value="Tweede Erediens - 10h15">Tweede Erediens</option>
+							</select>
+						</div>
+
+						<!-- Predikant -->
+						<div class="form-container__groupField">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="prediker">Predikant:</label>
+							<input type="text" id="prediker" name="prediker" placeholder="bv. Ds. Henk Stavast" required />
+						</div>
+
+						<!-- Skriflesing Referensie -->
+						<div class="form-container__groupField">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="skrifgedeelte">Skriflesing:</label>
+							<input type="text" id="skrifgedeelte_input" name="skrifgedeelte" placeholder="bv. Genesis 1: 1 - 20" required />
+						</div>
+
+						<!-- Tema -->
+						<div class="form-container__groupField">
+							<label class="form-container__headingh4 headingH4 headingH4--formLabel" for="tema">Tema:</label>
+							<input type="text" id="tema" name="tema" placeholder="bv. Soek in God jou sterkte." required />
+						</div>
+					</fieldset>
+
+					<!-- Psalms / Skrifberymings -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Liedere vir die Erediens</legend>
+
+						<!-- Voorsang -->
+						<div class="form-container__inputContainer">
+							<label>Voorsang:</label>
+							<select name="voorsangType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+							<input type="number" name="voorsangNumber" placeholder="Nommer" min="1" />
+							<input type="text" name="voorsangVerses" placeholder="Verse (bv. 1–2)" />
+						</div>
+
+						<!-- Lofpsalm na Seëngroet -->
+						<div class="form-container__inputContainer">
+							<label>Lofpsalm na Seëngroet:</label>
+							<select name="lofPsalmSeengroetType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+							<input type="number" name="lofPsalmSeengroetNumber" placeholder="Nommer" min="1" />
+							<input type="text" name="lofPsalmSeengroetVerses" placeholder="Verse (bv. 1–3)" />
+						</div>
+
+						<!-- Psalm na lees van die Wet -->
+						<div class="form-container__inputContainer">
+							<label>Psalm na lees van die Wet:</label>
+							<select name="psalmNaWetType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+							<input type="number" name="psalmNaWetNumber" placeholder="Nommer" min="1" />
+							<input type="text" name="psalmNaWetVerses" placeholder="Verse (bv. 7–9)" />
+						</div>
+
+						<!-- Psalm voor Woordverkondiging -->
+						<div class="form-container__inputContainer">
+							<label>Psalm voor Woordverkondiging:</label>
+							<select name="psalmVoorWoordType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+							<input type="number" name="psalmVoorWoordNumber" placeholder="Nommer" min="1" />
+							<input type="text" name="psalmVoorWoordVerses" placeholder="Verse (bv. 105)" />
+						</div>
+
+						<!-- Slotpsalm -->
+						<div class="form-container__inputContainer">
+							<label>Slotpsalm:</label>
+							<select name="psalmSlotType">
+								<option value="Psalm">Psalm</option>
+								<option value="Skrifberyming">Skrifberyming</option>
+							</select>
+							<input type="number" name="psalmSlotNumber" placeholder="Nommer" min="1" />
+							<input type="text" name="psalmSlotVerses" placeholder="Verse (bv. 1–6)" />
+						</div>
+					</fieldset>
+
+					<!-- Skrifgedeelte teks -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Skrifgedeelte</legend>
+
+						<div class="form-container__inputContainer">
+							<label for="skriflesingText">Skriflesing Teks:</label>
+							<textarea id="skriflesingText" name="skriflesingText" rows="8" placeholder="Plaas hier die volle teks van die Skrifgedeelte..."></textarea>
+						</div>
+
+						<div class="form-container__inputContainer">
+							<label for="teksverse">Teksvers(e):</label>
+							<input type="text" id="teksverse" name="teksverse" placeholder="bv. Genesis 1: 12" required />
+						</div>
+
+						<div class="form-container__inputContainer">
+							<label for="teksverseText">Skriflesing Teksvers:</label>
+							<textarea id="teksverseText" name="teksverseText" rows="8" placeholder="Plaas hier die volle teks van die Skrifgedeelte..."></textarea>
+						</div>
+					</fieldset>
+
+					<!-- Kollektes -->
+					<fieldset class="form-container__formSectionContainer">
+						<legend>Kollektes</legend>
+
+						<div class="form-container__inputContainer">
+							<label for="kollektesErediens">Tydens die Erediens:</label>
+							<input type="text" id="kollektesErediens" name="kollektesErediens" placeholder="bv. Diens van Barmhartigheid" required />
+						</div>
+
+						<div class="form-container__inputContainer">
+							<label for="kollektesDeure">By die Deure:</label>
+							<input type="text" id="kollektesDeure" name="kollektesDeure" placeholder="bv. Kerkkas" required />
+						</div>
+					</fieldset>
+
+					<button type="submit" class="form__btn btn btn--submitForm">Voltooi</button>
+				</form>
+			</section>
+
+			<a href="/develop" class="btn btn--keerTerug">Terug na Tuisblad</a>
+		</main>
+		<%- include('partials/footer') %>
+	</body>
+</html>

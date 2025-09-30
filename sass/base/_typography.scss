@@ -1,0 +1,36 @@
+@use "../abstracts/variables" as *;
+
+// headingH1
+.headingH1 {
+	font-family: "Archivo Black", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+// headingH2, headingH3, headingH4
+// <weight>: Use a value from 100 to 900
+.headingH2,
+.headingH3,
+.headingH4 {
+	color: $white;
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-size: clamp(1.6rem, 5vw, 1.8rem);
+	font-weight: 700;
+	font-style: normal;
+	letter-spacing: 1px;
+	&--formLabel {
+		font-size: clamp(1.5rem, 5vw, 1.7rem);
+		font-weight: 500;
+		line-height: 1.2;
+		text-align: left;
+	}
+}
+
+// paragraph
+// <weight>: Use a value from 100, 300, 400, 700 and 900
+.paragraph {
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}

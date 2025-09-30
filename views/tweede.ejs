@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title><%= title || 'Dopper MMS' %></title>
+
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+			rel="stylesheet" />
+
+		<link
+			rel="stylesheet"
+			href="../css/style.css" />
+	</head>
+	<body>
+		<header class="header">
+			<section class="header__heroSection">
+				<h1>Welkom by die Tweede Erediens.</h1>
+				<p>Hierdie platform help jou om die liturgie en skyfies vir die diens saam te stel. Voltooi die vorm hieronder om voort te gaan.</p>
+			</section>
+		</header>
+		<main>
+			<a
+				href="/develop"
+				class="btn btn--keerTerug"
+				>Terug na Tuisblad</a
+			>
+		</main>
+		<%- include('partials/footer') %>
+	</body>
+</html>
