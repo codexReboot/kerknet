@@ -32,8 +32,8 @@ async function startServer() {
 
 	// -------------------- Basic Routes --------------------
 	app.get("/", (req, res) => res.render("underConstruction", { title: "Home", message: "Hello, world!" }));
-	app.get("/develop", (req, res) => res.render("welcome", { title: "Home", message: "Hello, world!" }));
-	app.get("/develop/eerste", (req, res) => res.render("eerste", { title: "Eerste Diens", message: "Hello, world!" }));
+	app.get("/liturgie", (req, res) => res.render("welcome", { title: "Home", message: "Hello, world!" }));
+	app.get("/liturgie/eerste", (req, res) => res.render("eerste", { title: "Eerste Diens", message: "Hello, world!" }));
 
 	// -------------------- Helpers --------------------
 	const BOOK_NAMES_PATTERN = [

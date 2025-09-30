@@ -159,6 +159,12 @@ h6 {
   font-style: normal;
 }
 
+.btn--skepLiturgieBtn {
+  color: #f2f2f2;
+  font-style: italic;
+  font-weight: 700;
+}
+
 .btn {
   display: flex;
   flex-direction: row;
@@ -221,6 +227,9 @@ h6 {
   padding: 0.35em 1.25em;
   margin: 2rem;
   width: 100%;
+}
+.btn--skepLiturgieBtn {
+  background-color: #03417c;
 }
 
 .form-container {
