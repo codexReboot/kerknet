@@ -49,10 +49,11 @@ async function startServer() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        maxAge: 1000*60*60*24,
         httpOnly: true,
-        secure: false, // set to true if using HTTPS
-      },
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax"
+      }
     })
   );
 
