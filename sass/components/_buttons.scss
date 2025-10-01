@@ -63,4 +63,9 @@
 	&--skepLiturgieBtn {
 		background-color: $dark-blue;
 	}
+	&--login-button {
+		background-color: $dark-blue;
+		padding: 0.15em 1.25em;
+		margin-top: 2rem;
+	}
 }

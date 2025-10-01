@@ -159,8 +159,39 @@ h6 {
   font-style: normal;
 }
 
+.login-page__login-title {
+  color: #03417c;
+  font-size: clamp(2rem, 7vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.login-form__form-group-label {
+  color: #03417c;
+  font-size: clamp(1.4rem, 4.5vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+  text-transform: capitalize;
+  padding-left: 1rem;
+}
+.login-form__form-input::placeholder, .login-form__form-input[type=text]::placeholder {
+  color: rgba(242, 242, 242, 0.75);
+  font-size: clamp(1.2rem, 4vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.2;
+}
+
 .btn--skepLiturgieBtn {
   color: #f2f2f2;
+  font-size: clamp(1.8rem, 5.5vw, 2rem);
+  font-style: italic;
+  font-weight: 700;
+}
+.btn--login-button {
+  color: #f2f2f2;
+  font-size: clamp(1.8rem, 5.5vw, 2rem);
   font-style: italic;
   font-weight: 700;
 }
@@ -212,7 +243,7 @@ h6 {
   padding: 0.15em 0.75em;
 }
 .btn--tweede:hover {
-  background-color: rgba(0, 83, 160, 0.2);
+  background-color: rgba(2, 98, 187, 0.2);
 }
 .btn--keerTerug {
   background-color: rgba(242, 242, 242, 0.05);
@@ -223,13 +254,18 @@ h6 {
   padding: 0.35em 1.25em;
 }
 .btn--submitForm {
-  background-color: rgba(0, 83, 160, 0.95);
+  background-color: rgba(2, 98, 187, 0.95);
   padding: 0.35em 1.25em;
   margin: 2rem;
   width: 100%;
 }
 .btn--skepLiturgieBtn {
   background-color: #03417c;
+}
+.btn--login-button {
+  background-color: #03417c;
+  padding: 0.15em 1.25em;
+  margin-top: 2rem;
 }
 
 .form-container {
@@ -326,8 +362,13 @@ textarea {
   border-radius: 5px;
   background-color: #222;
   color: #eee;
-  font-size: 1rem;
   transition: border-color 0.3s ease;
+}
+
+.form-login__form-input {
+  font-size: clamp(1.2rem, 4vw, 1.4rem) !important;
+  padding: 0.75rem 1rem;
+  line-height: 1.6;
 }
 
 input[type=text]::placeholder,
@@ -487,6 +528,43 @@ button.add-btn {
 
 button.add-btn:hover {
   background-color: #00796b;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.login-form__form-group {
+  margin-bottom: 1remrem;
+  width: min(75%, 30rem);
+}
+.login-form__form-group-label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.login-form__form-input, .login-form__form-input[type=text] {
+  background: #333333;
+  border: 1px solid #f2f2f2;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.3s ease;
+}
+.login-form__form-input:focus {
+  border-color: #0262bb;
+  outline: none;
+}
+
+.error-message {
+  background-color: #ffcccc;
+  color: #b00000;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
 }
 
 #slidesContainer {
@@ -793,7 +871,7 @@ body.hide-cursor {
   margin: 0;
 }
 .slide-section .slide .slide__title {
-  color: #0053a0;
+  color: #0262bb;
   font-size: 5rem;
   font-weight: bold;
   letter-spacing: 0;
@@ -817,7 +895,7 @@ body.hide-cursor {
   text-align: center;
   text-decoration: 4px solid underline;
   text-underline-offset: 7px;
-  background-color: #0053a0;
+  background-color: #0262bb;
   border-radius: 1rem;
   box-shadow: 0 0 25px 5px rgba(51, 51, 51, 0.25);
   padding: 1.25rem 0;
@@ -903,7 +981,7 @@ body.hide-cursor {
 .slide-section .slide__kollektesTitle {
   font-size: 5rem;
   font-weight: bold;
-  color: #0053a0;
+  color: #0262bb;
   text-align: left;
 }
 .slide-section .slide__kollektesSubheading {
@@ -926,6 +1004,27 @@ body.hide-cursor {
 }
 .slide-section .slide--black {
   background-color: #333333;
+}
+
+.login-page {
+  background: linear-gradient(to bottom right, rgba(2, 98, 187, 0.25), rgba(2, 98, 187, 0.55), rgba(2, 98, 187, 0.85), #0262bb);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.login-page__login-card {
+  background-color: #f2f2f2;
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px 5px rgba(51, 51, 51, 0.45);
+  width: min(95%, 550px);
+}
+.login-page__login-title {
+  margin-bottom: 1.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

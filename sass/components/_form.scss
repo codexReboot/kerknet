@@ -85,8 +85,13 @@ textarea {
 	border-radius: 5px;
 	background-color: #222;
 	color: #eee;
-	font-size: 1rem;
+	// font-size: 1rem;
 	transition: border-color 0.3s ease;
+}
+.form-login__form-input {
+	font-size: clamp(1.2rem, 4vw, 1.4rem) !important;
+	padding: 0.75rem 1rem;
+	line-height: 1.6;
 }
 
 input[type="text"]::placeholder,
@@ -251,4 +256,40 @@ button.add-btn {
 
 button.add-btn:hover {
 	background-color: #00796b;
+}
+
+// login-form
+
+.login-form {
+	@include displayFlexColumn;
+	&__form-group {
+		margin-bottom: 1remrem;
+		width: min(75%, 30rem);
+	}
+	&__form-group-label {
+		display: block;
+		margin-bottom: 0.25rem;
+	}
+	&__form-input,
+	&__form-input[type="text"] {
+		background: $dark;
+		border: 1px solid $white;
+		border-radius: 0.5rem;
+		width: 100%;
+		padding: 0.5rem 1rem;
+		transition: border-color 0.3s ease;
+	}
+	&__form-input:focus {
+		border-color: $blue;
+		outline: none;
+	}
+}
+
+.error-message {
+	background-color: #ffcccc;
+	color: #b00000;
+	padding: 0.8rem;
+	margin-bottom: 1rem;
+	border-radius: 6px;
+	font-size: 0.95rem;
 }

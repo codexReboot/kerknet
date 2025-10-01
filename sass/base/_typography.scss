@@ -35,9 +35,46 @@
 	font-style: normal;
 }
 
+//
+.login-page {
+	&__login-title {
+		color: $dark-blue;
+		font-size: clamp(2rem, 7vw, 2.2rem);
+		font-weight: 700;
+		line-height: 1.2;
+		text-align: center;
+	}
+}
+// login-form
+.login-form {
+	&__form-group-label {
+		color: $dark-blue;
+		font-size: clamp(1.4rem, 4.5vw, 1.6rem);
+		font-weight: 400;
+		line-height: 1.2;
+		text-align: left;
+		text-transform: capitalize;
+		padding-left: 1rem;
+	}
+	&__form-input::placeholder,
+	&__form-input[type="text"]::placeholder {
+		color: rgba($white, 0.75);
+		font-size: clamp(1.2rem, 4vw, 1.4rem);
+		font-style: italic;
+		line-height: 1.2;
+	}
+}
+// buttons
 .btn {
 	&--skepLiturgieBtn {
 		color: $white;
+		font-size: clamp(1.8rem, 5.5vw, 2rem);
+		font-style: italic;
+		font-weight: 700;
+	}
+	&--login-button {
+		color: $white;
+		font-size: clamp(1.8rem, 5.5vw, 2rem);
 		font-style: italic;
 		font-weight: 700;
 	}
