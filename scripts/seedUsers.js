@@ -1,6 +1,6 @@
 // scripts/seedUsers.js
 import pool from "../src/db/dbHelper.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs"; // use bcryptjs instead of bcrypt
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -15,7 +15,7 @@ dotenv.config();
 		];
 
 		for (const u of users) {
-			// hash the password
+			// hash the password (bcryptjs defaults to 10 salt rounds, you can increase if needed)
 			const hash = await bcrypt.hash(u.password, 12);
 
 			// insert into users table using password_hash column
