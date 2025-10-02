@@ -1,6 +1,6 @@
 import express from "express";
 import pool from "../db/dbHelper.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs"; // switched to bcryptjs
 import rateLimit from "express-rate-limit";
 
 const router = express.Router();
@@ -16,7 +16,7 @@ const loginLimiter = rateLimit({
 
 // -------------------- GET login page --------------------
 router.get("/login", (req, res) => {
-	res.render("login", { error: null });
+	res.render("login", { error: null, user: req.session.user || null });
 });
 
 // -------------------- POST login --------------------
@@ -27,6 +27,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 	if (!username || !password) {
 		return res.render("login", {
 			error: "Vul asseblief beide velde in.",
+			user: null,
 		});
 	}
 
@@ -35,22 +36,16 @@ router.post("/login", loginLimiter, async (req, res) => {
 		const [rows] = await pool.query("SELECT id, username, role, password_hash, active FROM users WHERE username = ? AND active = 1", [username]);
 		const user = rows[0];
 
-		// Dummy hash to prevent timing attacks if user not found
-		const dummyHash = "$2b$12$KbQi9JWxu2E7B.p0d1z6K.u9Q0Yo9oBIFQHf9U7v5eP8f/Oe.ZHnG";
+		// Dummy hash to prevent timing attacks
+		const dummyHash = "$2a$10$CwTycUXWue0Thq9StjUM0uJ8ZpQ6bZ4f3W1b6tU8LwRjT5C9JH2lW"; // bcryptjs valid hash
 
+		// Compare password against stored hash (or dummy hash if no user found)
 		const match = await bcrypt.compare(password, user ? user.password_hash : dummyHash);
 
-		if (!user || !match) {
-			// Generic error message
+		if (!user || !match || !user.password_hash) {
 			return res.render("login", {
 				error: "Ongeldige gebruikersnaam of wagwoord.",
-			});
-		}
-
-		if (!user.password_hash) {
-			console.error("Warning: User found but password_hash is missing:", { id: user.id, username: user.username });
-			return res.render("login", {
-				error: "Ongeldige gebruikersnaam of wagwoord.",
+				user: null,
 			});
 		}
 

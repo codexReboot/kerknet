@@ -7,7 +7,6 @@ import berymingsData from "./data/skrifberymingsJSON.json" with { type: "json" }
 import session from "express-session";
 import SequelizeStoreInit from "connect-session-sequelize";
 import { pool, sequelize } from "./db/dbHelper.js";
-import bcrypt from "bcrypt";
 import authRoutes from "./routes/auth.js";
 import { requireAuth } from "./middleware/auth.js";
 
