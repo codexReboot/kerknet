@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dopper MMS</title>
+		<title>KerkNet - Skep Erediens-Liturgie</title>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,27 +13,20 @@
 
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
-	<body>
-		<header class="header">
+	<body class="body body--welcomepage">
+		<header class="site-header">
 			<%- include('partials/navbar') %>
 			<section class="header__heroSection">
-				<h1>🕊️ Erediens Skyfies</h1>
+				<h1>🕊️ Skep Erediens-Liturgie</h1>
 				<p>Skep maklik die skyfies vir jou erediens.</p>
 			</section>
 		</header>
 		<main class="main centered">
 			<div class="main__ctaContainer cta-buttons">
 				<a href="/liturgie/eerste" class="btn btn--eerste">Eerste Diens</a>
-				<a href="/liturgie/tweede" class="btn btn--tweede">Tweede Diens</a>
+				<!-- <a href="/liturgie/tweede" class="btn btn--tweede">Tweede Diens</a> -->
 			</div>
 		</main>
-		<aside class="sidebar">
-			<!-- contactSection -->
-			<section class="sidebar__contactSection contactSection">ContactSection</section>
-			<!-- resourcesSection -->
-			<section class="sidebar__resourcesSection resourcesSection">ResourcesSection</section>
-		</aside>
 		<%- include('partials/footer') %>
-		<script type="module" src="js/app.js"></script>
 	</body>
 </html>

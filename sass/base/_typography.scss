@@ -35,6 +35,28 @@
 	font-style: normal;
 }
 
+// nav
+.nav {
+	color: $blue;
+	font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+	.logo__logoIcon {
+		font-size: clamp(1.5rem, 4.7vw, 1.7rem);
+	}
+	.logo__logoText {
+		font-size: clamp(1.3rem, 4vw, 1.5rem);
+		font-weight: 700;
+		alignment-baseline: central;
+	}
+	&__greet {
+	}
+	&__username {
+		font-weight: 700;
+		text-transform: capitalize;
+		text-decoration: underline 2px solid;
+		text-underline-offset: 3px;
+	}
+}
+
 //
 .login-page {
 	&__login-title {
@@ -66,7 +88,8 @@
 }
 // buttons
 .btn {
-	&--skepLiturgieBtn {
+	&--skepLiturgieBtn,
+	&--returnFromSlidePreview {
 		color: $white;
 		font-size: clamp(1.8rem, 5.5vw, 2rem);
 		font-style: italic;
@@ -77,5 +100,15 @@
 		font-size: clamp(1.8rem, 5.5vw, 2rem);
 		font-style: italic;
 		font-weight: 700;
+	}
+	&--logout-button {
+		line-height: 1.2;
+	}
+}
+
+// footer
+.footer {
+	&__copyright {
+		font-size: clamp(1.2rem, 4vw, 1.4rem);
 	}
 }

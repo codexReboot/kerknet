@@ -2,4 +2,7 @@
 @use "../abstracts/mixins" as *;
 
 .logo {
+	&__logoIcon {
+		margin-bottom: 0rem;
+	}
 }

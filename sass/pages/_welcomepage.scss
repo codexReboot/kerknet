@@ -1,0 +1,8 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.body {
+	&--welcomepage {
+		height: 100vh;
+	}
+}

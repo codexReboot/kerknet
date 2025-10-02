@@ -4,138 +4,19 @@
 .nav {
 	@include displayFlexRow;
 	justify-content: space-between;
-	padding: 0.5rem 1rem;
-	background-color: $dark;
-	border-bottom: 1px solid rgba($white, 0.65);
-	box-shadow: 0px 8px 12px 8px rgba($dark, 0.85);
-	height: 7rem;
-	opacity: 0;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 1000;
-	transition: opacity 800ms;
-	&__logoContainer {
+	background: linear-gradient(to bottom right, rgba($white, 0.55), rgba($white, 0.75), rgba($white, 0.85), rgba($white, 1));
+	padding: 1rem 2rem;
+	&__logo {
 		@include displayFlexRow;
 	}
-	&__logo {
-		display: block;
-		width: 13rem;
-		height: auto;
-		transition: width 0.3s;
+	&__navlist {
+		@include displayFlexRow;
+		justify-content: flex-end;
 	}
-	&__logo:hover {
-		width: 13.5rem;
+	&__navitem {
+		@include displayFlexRow;
 	}
-	// Hamburger Button
-	&__hamburger {
-		display: flex;
-		flex-direction: column;
-		cursor: pointer;
-		gap: 5px;
-		backface-visibility: hidden;
-		transition: gap 0.3s;
-		div {
-			width: 3rem;
-			height: 3px;
-			background: $white;
-			backface-visibility: hidden;
-			transition: all 0.3s ease;
-		}
-		&--active {
-			div:nth-child(1) {
-				background: rgba($white, 0.35);
-				width: 3.3rem;
-				height: 5px;
-				transform: translateY(10px) rotate(45deg);
-			}
-			div:nth-child(2) {
-				opacity: 0;
-			}
-			div:nth-child(3) {
-				background: rgba($white, 0.35);
-				width: 3.3rem;
-				height: 5px;
-				transform: translateY(-8px) rotate(-45deg);
-			}
-		}
-		&--activeBar {
-			background: rgba($white, 1);
-		}
-		&--active:hover {
-			div:nth-child(1) {
-				transform: translateY(12px) rotate(45deg);
-			}
-
-			div:nth-child(3) {
-				transform: translateY(-10px) rotate(-45deg);
-			}
-		}
-	}
-	&__hamburger:hover {
-		gap: 7px;
-	}
-	// Navigation list (hidden by default on mobile)
-	&__list {
-		display: none; // Hide by default on mobile
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		gap: 1.25rem;
-		background: rgba($dark, 0.95);
-		border-top: 1px solid rgba($white, 0.1);
-		width: 100%;
-		height: 95vh;
-		padding: 5rem 1rem 0;
-		position: fixed;
-		top: 6.9rem;
-		left: 0;
-		visibility: hidden; /* Hide initially */
-		opacity: 0;
-		transform: scaleY(0);
-		transform-origin: top;
-	}
-	&__list--open {
-		display: flex; /* Show on open */
-	}
-	/* Nav items default state (hidden) */
-	&__item {
-		opacity: 0;
-		transform: translateY(20rem);
-	}
-	&__link {
-		display: block;
-		width: 10rem;
-		height: 3rem;
-		transition: all 0.3s ease;
-	}
-}
-// Larger screens (750px and up)
-@media (min-width: 750px) {
-	.nav {
-		padding: 0.5rem 2rem;
-		&__hamburger {
-			display: none;
-		}
-		&__list {
-			@include displayFlexRow;
-			justify-content: flex-end;
-			gap: 1rem;
-			background: transparent;
-			border-top: none;
-			height: 2rem;
-			padding: 0;
-			visibility: visible;
-			opacity: 1;
-			transform: none;
-			position: static;
-			z-index: 1100;
-		}
-		&__item {
-			visibility: visible;
-			opacity: 1;
-			transform: none;
-		}
+	&__username {
+		margin-left: 0.5rem;
 	}
 }

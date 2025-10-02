@@ -68,4 +68,25 @@
 		padding: 0.15em 1.25em;
 		margin-top: 2rem;
 	}
+	&--logout-button {
+		padding: 0.25rem 1rem;
+		margin: 0 0 0 1rem;
+		background-color: #e74c3c;
+		color: white;
+		text-decoration: none;
+		border-radius: 4px;
+		font-weight: bold;
+		transition: background-color 0.2s;
+	}
+	&--logout-button:hover {
+		background-color: #c0392b;
+	}
+	&--returnFromSlidePreview {
+		position: absolute;
+		bottom: 5rem;
+		left: 0;
+		right: 0;
+		background-color: $red;
+		padding: 0.25rem 1.5rem;
+	}
 }

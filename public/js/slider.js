@@ -30,10 +30,12 @@ document.addEventListener("keydown", (e) => {
 
 // Mouse UI (arrows & cursor)
 const arrows = document.getElementById("navArrows");
+const returnBtn = document.querySelector(".btn--returnFromSlidePreview");
 let inactivityTimer;
 
 function showUI() {
-	arrows.classList.add("visible");
+	if (arrows) arrows.classList.add("visible");
+	if (returnBtn) returnBtn.classList.add("visible");
 	document.body.classList.remove("hide-cursor");
 
 	clearTimeout(inactivityTimer);
@@ -41,7 +43,8 @@ function showUI() {
 }
 
 function hideUI() {
-	arrows.classList.remove("visible");
+	if (arrows) arrows.classList.remove("visible");
+	if (returnBtn) returnBtn.classList.remove("visible");
 	document.body.classList.add("hide-cursor");
 }
 

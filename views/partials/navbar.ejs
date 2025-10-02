@@ -1,36 +1,14 @@
-<nav class="header__nav nav">
-	<figure class="nav__logoContainer">
-		<img
-			class="nav__logo logo logo--nav"
-			src="#"
-			alt="logo" />
-	</figure>
-	<div class="nav__hamburger">
-		<div class="hamburgerBar"></div>
-		<div class="hamburgerBar"></div>
-		<div class="hamburgerBar"></div>
+<nav class="nav">
+	<div class="nav__logo logo">
+		<span class="logo__logoIcon">⛪</span>
+		<span class="logo__logoText">KerkNet</span>
 	</div>
-	<ul class="nav__list">
-		<li class="nav__item">
-			<a
-				class="nav__link navlinkText navlinkText--navbar"
-				href="#home"
-				>Tuis</a
-			>
-		</li>
-		<li class="nav__item">
-			<a
-				class="nav__link navlinkText navlinkText--navbar"
-				href="#kontak"
-				>Kontak</a
-			>
-		</li>
-		<li class="nav__item">
-			<a
-				class="nav__link navlinkText navlinkText--navbar"
-				href="#bronne"
-				>Bronne</a
-			>
+	<ul class="nav__navlist">
+		<li class="nav__navitem nav__navitem--logout">
+			<% if (user) { %>
+			<span class="nav__greet">Welkom terug, <span class="nav__username"><%= user.username %></span></span>
+			<a class="btn btn--logout-button" href="/">Teken Uit</a>
+			<% } %>
 		</li>
 	</ul>
 </nav>
