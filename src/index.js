@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
-import fs from "fs";
 import psalmsData from "./data/psalmsJSON.json" with { type: "json" };
 import berymingsData from "./data/skrifberymingsJSON.json" with { type: "json" };
 import session from "express-session";
@@ -29,6 +28,12 @@ async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 5000;
 
+  // If running behind a reverse proxy (cPanel, PaaS), trust the first proxy.
+  // This is required so Express reads the correct protocol and secure cookie behavior works.
+  if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+  }
+
   // -------------------- View Engine --------------------
   app.set("view engine", "ejs");
   app.set("views", path.join(__dirname, "views"));
@@ -43,18 +48,25 @@ async function startServer() {
 
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || "change_this_secret",
+      secret: process.env.SESSION_SECRET || "thisISaSUPERsecret123SEssion", // set a strong secret in production
       store,
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 1000*60*60*24,
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax"
-      }
+        secure: process.env.NODE_ENV === "production" && process.env.USE_HTTPS === "true", // requires trust proxy in production
+        sameSite: "lax",
+      },
     })
   );
+
+  // -------------------- Make current user available in all views --------------------
+  // Use res.locals.user in templates instead of passing user on every render.
+  app.use((req, res, next) => {
+    res.locals.user = req.session?.user || null;
+    next();
+  });
 
   // -------------------- Auth Routes --------------------
   app.use(authRoutes);
@@ -64,21 +76,26 @@ async function startServer() {
     res.render("underConstruction", { title: "Home", message: "Hello, world!" })
   );
 
-  app.get("/liturgie", requireAuth, (req, res) =>
-  res.render("welcome", { 
-    title: "Home", 
-    message: "Hello, world!",
-    user: req.session.user // pass the logged-in user
-  })
-);
+  app.get(
+    "/liturgie",
+    requireAuth,
+    (req, res) =>
+      res.render("welcome", {
+        title: "Home",
+        message: "Hello, world!",
+        // no need to pass user explicitly because of res.locals.user
+      })
+  );
 
-app.get("/liturgie/eerste", requireAuth, (req, res) =>
-  res.render("eerste", { 
-    title: "Eerste Diens", 
-    message: "Hello, world!",
-    user: req.session.user
-  })
-);
+  app.get(
+    "/liturgie/eerste",
+    requireAuth,
+    (req, res) =>
+      res.render("eerste", {
+        title: "Eerste Diens",
+        message: "Hello, world!",
+      })
+  );
 
   // -------------------- Helpers --------------------
   const BOOK_NAMES_PATTERN = [
