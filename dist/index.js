@@ -3,7 +3,6 @@
 var _express = _interopRequireDefault(require("express"));
 var _path = _interopRequireDefault(require("path"));
 var _dotenv = _interopRequireDefault(require("dotenv"));
-var _fs = _interopRequireDefault(require("fs"));
 var _psalmsJSON = _interopRequireDefault(require("./data/psalmsJSON.json"));
 var _skrifberymingsJSON = _interopRequireDefault(require("./data/skrifberymingsJSON.json"));
 var _expressSession = _interopRequireDefault(require("express-session"));
@@ -30,6 +29,12 @@ async function startServer() {
   const app = (0, _express.default)();
   const PORT = process.env.PORT || 5000;
 
+  // If running behind a reverse proxy (cPanel, PaaS), trust the first proxy.
+  // This is required so Express reads the correct protocol and secure cookie behavior works.
+  if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+  }
+
   // -------------------- View Engine --------------------
   app.set("view engine", "ejs");
   app.set("views", _path.default.join(_dirname, "views"));
@@ -48,17 +53,27 @@ async function startServer() {
   await store.sync(); // ensures the table exists with correct schema
 
   app.use((0, _expressSession.default)({
-    secret: process.env.SESSION_SECRET || "change_this_secret",
+    secret: process.env.SESSION_SECRET || "thisISaSUPERsecret123SEssion",
+    // set a strong secret in production
     store,
     resave: false,
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
+      // 1 day
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production" && process.env.USE_HTTPS === "true",
+      // requires trust proxy in production
       sameSite: "lax"
     }
   }));
+
+  // -------------------- Make current user available in all views --------------------
+  // Use res.locals.user in templates instead of passing user on every render.
+  app.use((req, res, next) => {
+    res.locals.user = req.session?.user || null;
+    next();
+  });
 
   // -------------------- Auth Routes --------------------
   app.use(_auth.default);
@@ -70,13 +85,12 @@ async function startServer() {
   }));
   app.get("/liturgie", _auth2.requireAuth, (req, res) => res.render("welcome", {
     title: "Home",
-    message: "Hello, world!",
-    user: req.session.user // pass the logged-in user
+    message: "Hello, world!"
+    // no need to pass user explicitly because of res.locals.user
   }));
   app.get("/liturgie/eerste", _auth2.requireAuth, (req, res) => res.render("eerste", {
     title: "Eerste Diens",
-    message: "Hello, world!",
-    user: req.session.user
+    message: "Hello, world!"
   }));
 
   // -------------------- Helpers --------------------

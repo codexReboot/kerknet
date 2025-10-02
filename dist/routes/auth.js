@@ -69,7 +69,15 @@ router.post("/login", loginLimiter, async (req, res) => {
       username: user.username,
       role: user.role
     };
-    res.redirect("/liturgie");
+
+    // ✅ Ensure session is saved before redirect
+    req.session.save(err => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).send("Sessie fout.");
+      }
+      res.redirect("/liturgie");
+    });
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).send("Server fout.");
@@ -80,6 +88,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 router.get("/logout", (req, res) => {
   req.session.destroy(err => {
     if (err) console.error("Logout error:", err);
+    res.clearCookie("connect.sid"); // ✅ clears cookie explicitly
     res.redirect("/login");
   });
 });
