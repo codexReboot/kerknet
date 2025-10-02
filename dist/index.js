@@ -9,7 +9,6 @@ var _skrifberymingsJSON = _interopRequireDefault(require("./data/skrifberymingsJ
 var _expressSession = _interopRequireDefault(require("express-session"));
 var _connectSessionSequelize = _interopRequireDefault(require("connect-session-sequelize"));
 var _dbHelper = require("./db/dbHelper.js");
-var _bcrypt = _interopRequireDefault(require("bcrypt"));
 var _auth = _interopRequireDefault(require("./routes/auth.js"));
 var _auth2 = require("./middleware/auth.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
